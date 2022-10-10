@@ -8,16 +8,11 @@ const MealItemForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     const enteredAmount = +amountInputRef.current.value.trim();
-    if (
-      isNaN(enteredAmount) ||
-      enteredAmount < 1 ||
-      enteredAmount > 5
-    ) {
-        setAmountIsValid(false);
-        return;
-    } else {
-        setAmountIsValid(true);
+    if (isNaN(enteredAmount) || enteredAmount < 1 || enteredAmount > 5) {
+      setAmountIsValid(false);
+      return;
     }
+    setAmountIsValid(true);
     props.onAddToCart(enteredAmount);
   };
   return (
@@ -35,7 +30,9 @@ const MealItemForm = (props) => {
         }}
       />
       <button className={classes.button}>+ Add</button>
-      {!amountIsValid && <p style={{color:"red"}}>Enter a valid amount (1-5).</p>}
+      {!amountIsValid && (
+        <p style={{ color: "red" }}>Enter a valid amount (1-5).</p>
+      )}
     </form>
   );
 };
