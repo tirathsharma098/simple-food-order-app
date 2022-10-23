@@ -23,18 +23,21 @@ const ModalOverlay = (props) => {
 
 const overlayElement = document.getElementById("overlays");
 
-const Modal = (props) => {
+const ModalCheck = (props) => {
   return (
     <Fragment>
-      {createPortal(
-        <Backdrop cartVisibility={props.cartVisibility} />,
-        overlayElement
-      )}
-      {createPortal(
-        <ModalOverlay>{props.children}</ModalOverlay>,
-        overlayElement
-      )}
+      <Backdrop cartVisibility={props.cartVisibility} />
+      <ModalOverlay>{props.children}</ModalOverlay>
     </Fragment>
+  );
+};
+
+const Modal = (props) => {
+  return createPortal(
+    <ModalCheck cartVisibility={props.cartVisibility}>
+      {props.children}
+    </ModalCheck>,
+    overlayElement
   );
 };
 
